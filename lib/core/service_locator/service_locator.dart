@@ -7,6 +7,9 @@ import 'package:islamic_calander/core/router/middleware.dart';
 import 'package:islamic_calander/features/date_conversion/data/data_source/date_conversion_data_source.dart';
 import 'package:islamic_calander/features/date_conversion/data/repos/date_conversion_repo_impl.dart';
 import 'package:islamic_calander/features/date_conversion/domain/repo/date_conversion_repo.dart';
+import 'package:islamic_calander/features/date_year/data/data_source/date_info_remote_data_source.dart';
+import 'package:islamic_calander/features/date_year/data/repo/date_year_repo_imp.dart';
+import 'package:islamic_calander/features/date_year/domain/repo/date_year_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final GetIt serviceLocator = GetIt.instance;
@@ -21,7 +24,7 @@ Future initServiceLocator() async {
   serviceLocator.registerLazySingleton<HomeRepoDataSource>(() => HomeRepoDataSource(api: serviceLocator()));
   serviceLocator
       .registerLazySingleton<DateConversionRepo>(() => DateConversionRepoImpl(homeRepoDataSource: serviceLocator()));
-
-  // serviceLocator.registerLazySingleton<HomeRemoteDataSource>(() => HomeRemoteDataSource(api: serviceLocator()));
-  // serviceLocator.registerLazySingleton<HomeRepo>(() => HomeRepoImp(homeRemoteDataSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<DateInfoRemoteDataSource>(() => DateInfoRemoteDataSource(api: serviceLocator()));
+  serviceLocator
+      .registerLazySingleton<DateInfoRepo>(() => DateInfoRepoImpl(dateInfoRemoteDataSource: serviceLocator()));
 }

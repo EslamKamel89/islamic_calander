@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_calander/core/extensions/context-extensions.dart';
-import 'package:islamic_calander/features/date_conversion/presentation/cubits/date_conversion/date_conversion_cubit.dart';
 
 class YearSearchWidget extends StatefulWidget {
-  const YearSearchWidget({super.key});
-
+  const YearSearchWidget({super.key, required this.handleInputChange});
+  final Function handleInputChange;
   @override
   State<YearSearchWidget> createState() => _YearSearchWidgetState();
 }
@@ -14,12 +12,6 @@ class YearSearchWidget extends StatefulWidget {
 class _YearSearchWidgetState extends State<YearSearchWidget> {
   final TextEditingController _yearController = TextEditingController();
   final FocusNode focusNode = FocusNode();
-  late final DateConversionCubit controller;
-  @override
-  void initState() {
-    super.initState();
-    controller = context.read<DateConversionCubit>();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +25,7 @@ class _YearSearchWidgetState extends State<YearSearchWidget> {
           if (value.length >= 4) {
             focusNode.unfocus();
           }
-          controller.goToYear(value);
+          widget.handleInputChange(value);
         },
         keyboardType: TextInputType.number,
         maxLength: 4,

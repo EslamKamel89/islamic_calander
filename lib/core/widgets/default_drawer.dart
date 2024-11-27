@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_calander/core/extensions/context-extensions.dart';
+import 'package:islamic_calander/core/router/app_routes_names.dart';
 import 'package:islamic_calander/core/themes/themedata.dart';
 import 'package:islamic_calander/utils/styles/styles.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -40,9 +41,17 @@ class DefaultDrawer extends StatelessWidget {
             _createDrawerItem(
               context,
               icon: MdiIcons.databaseSearch,
+              text: 'Home',
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(context, AppRoutesNames.dateConversionView, (_) => false);
+              },
+            ),
+            _createDrawerItem(
+              context,
+              icon: MdiIcons.databaseSearch,
               text: 'Year',
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamedAndRemoveUntil(context, AppRoutesNames.dateYearView, (_) => false);
               },
             ),
             _createDrawerItem(

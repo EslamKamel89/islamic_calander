@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islamic_calander/core/widgets/default_drawer.dart';
 import 'package:islamic_calander/core/widgets/sizer.dart';
+import 'package:islamic_calander/features/date_conversion/presentation/cubits/date_conversion/date_conversion_cubit.dart';
 import 'package:islamic_calander/features/date_conversion/presentation/views/widgets/table_widget.dart';
 import 'package:islamic_calander/features/date_conversion/presentation/views/widgets/wisdom_coursel.dart';
 import 'package:islamic_calander/features/date_conversion/presentation/views/widgets/year_search_widget.dart';
@@ -13,6 +15,13 @@ class DateConversionView extends StatefulWidget {
 }
 
 class _DateConversionViewState extends State<DateConversionView> {
+  late DateConversionCubit controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = context.read<DateConversionCubit>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +31,10 @@ class _DateConversionViewState extends State<DateConversionView> {
       body: Column(
         children: [
           const Sizer(),
-          const YearSearchWidget(),
+          YearSearchWidget(
+            handleInputChange: (String year) => controller.goToYear(year),
+          ),
+
           const TableWidget(),
           // const DataSelector(),
           const Spacer(),
