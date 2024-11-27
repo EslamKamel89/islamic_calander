@@ -11,10 +11,12 @@ class DateConversionRepoImpl implements DateConversionRepo {
 
   DateConversionRepoImpl({required this.homeRepoDataSource});
   @override
-  Future<Either<Failure, SelectedDateConversionModel>> getDateConversion(DateTime selectedDate) async {
+  Future<Either<Failure, SelectedDateConversionModel>> getDateConversion(
+      DateTime selectedDate) async {
     final t = prt('getDateConversion - DateConversionRepoImpl');
     try {
-      SelectedDateConversionModel model = await homeRepoDataSource.getDateConversion(selectedDate);
+      SelectedDateConversionModel model =
+          await homeRepoDataSource.getDateConversion(selectedDate);
       pr(model, t);
       return Right(model);
     } catch (e) {

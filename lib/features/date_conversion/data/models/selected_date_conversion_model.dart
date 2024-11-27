@@ -20,8 +20,10 @@ class SelectedDateConversionModel extends SelectedDateConversionEntity {
       // selectedGeorgianDate: json['selectedGeorgianDate'] != null
       //     ? DateTime.fromMillisecondsSinceEpoch(json['selectedGeorgianDate'] as int)
       //     : null,
-      selectedOldHijriDate: json['old_hijri'] != null ? json['old_hijri'] as String : null,
-      selectedNewHijriDate: json['new_hijri'] != null ? json['new_hijri'] as String : null,
+      selectedOldHijriDate:
+          json['old_hijri'] != null ? json['old_hijri'] as String : null,
+      selectedNewHijriDate:
+          json['new_hijri'] != null ? json['new_hijri'] as String : null,
     );
   }
   @override

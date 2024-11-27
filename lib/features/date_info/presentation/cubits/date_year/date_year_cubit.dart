@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islamic_calander/core/Errors/failure.dart';
 import 'package:islamic_calander/core/enums/response_state.dart';
 import 'package:islamic_calander/core/heleprs/print_helper.dart';
-import 'package:islamic_calander/features/date_year/data/models/date_info_model.dart';
-import 'package:islamic_calander/features/date_year/domain/entities/date_info_entity.dart';
-import 'package:islamic_calander/features/date_year/domain/repo/date_year_repo.dart';
+import 'package:islamic_calander/features/date_info/data/models/date_info_model.dart';
+import 'package:islamic_calander/features/date_info/domain/entities/date_info_entity.dart';
+import 'package:islamic_calander/features/date_info/domain/repo/date_year_repo.dart';
 
 part 'date_year_state.dart';
 
@@ -16,12 +16,14 @@ class DateYearCubit extends Cubit<DateYearState> {
   }) : super(DateYearState());
   Future getDateYear(int year) async {
     final t = prt('getDateYear - DeteYearCubit');
-    emit(state.copyWith(getDateYearState: ResponseState.loading, selectedYear: year));
+    emit(state.copyWith(
+        getDateYearState: ResponseState.loading, selectedYear: year));
     final result = await dateInfoRepo.getDateInfoYear(year);
     return result.fold(
       (Failure failure) {
         pr(failure, t);
-        emit(state.copyWith(getDateYearState: ResponseState.failure, datesInfo: []));
+        emit(state
+            .copyWith(getDateYearState: ResponseState.failure, datesInfo: []));
       },
       (List<DateInfoModel> models) {
         pr(models, t);

@@ -9,7 +9,8 @@ import 'package:islamic_calander/core/router/app_routes_names.dart';
 import 'package:islamic_calander/core/service_locator/service_locator.dart';
 import 'package:islamic_calander/core/themes/theme_cubit.dart';
 import 'package:islamic_calander/features/date_conversion/presentation/cubits/date_conversion/date_conversion_cubit.dart';
-import 'package:islamic_calander/features/date_year/presentation/cubits/date_year/date_year_cubit.dart';
+import 'package:islamic_calander/features/date_info/presentation/cubits/date_month/date_month_cubit.dart';
+import 'package:islamic_calander/features/date_info/presentation/cubits/date_year/date_year_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,10 +42,14 @@ class MyApp extends StatelessWidget {
             create: (_) => ThemeCubit(),
           ),
           BlocProvider(
-            create: (context) => DateConversionCubit(dateConversionRepo: serviceLocator()),
+            create: (context) =>
+                DateConversionCubit(dateConversionRepo: serviceLocator()),
           ),
           BlocProvider(
             create: (context) => DateYearCubit(dateInfoRepo: serviceLocator()),
+          ),
+          BlocProvider(
+            create: (context) => DateMonthCubit(dateInfoRepo: serviceLocator()),
           ),
         ],
         child: Builder(builder: (context) {

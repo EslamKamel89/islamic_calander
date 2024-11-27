@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:islamic_calander/core/enums/month_enums.dart';
 import 'package:islamic_calander/core/enums/response_state.dart';
 import 'package:islamic_calander/core/heleprs/print_helper.dart';
 import 'package:islamic_calander/core/widgets/default_drawer.dart';
@@ -8,23 +9,24 @@ import 'package:islamic_calander/core/widgets/default_screen_padding.dart';
 import 'package:islamic_calander/core/widgets/sizer.dart';
 import 'package:islamic_calander/features/date_conversion/presentation/cubits/date_conversion/date_conversion_cubit.dart';
 import 'package:islamic_calander/features/date_conversion/presentation/views/widgets/year_search_widget.dart';
-import 'package:islamic_calander/features/date_year/presentation/cubits/date_year/date_year_cubit.dart';
-import 'package:islamic_calander/features/date_year/presentation/widgets/date_info_item_card.dart';
+import 'package:islamic_calander/features/date_info/presentation/cubits/date_month/date_month_cubit.dart';
+import 'package:islamic_calander/features/date_info/presentation/widgets/date_info_item_card.dart';
+import 'package:islamic_calander/features/date_info/presentation/widgets/month_dropdown.dart';
 import 'package:islamic_calander/utils/styles/styles.dart';
 
-class DateYearView extends StatefulWidget {
-  const DateYearView({super.key});
+class DateMonthView extends StatefulWidget {
+  const DateMonthView({super.key});
 
   @override
-  State<DateYearView> createState() => _DateYearViewState();
+  State<DateMonthView> createState() => _DateMonthViewState();
 }
 
-class _DateYearViewState extends State<DateYearView> {
-  late DateYearCubit controller;
+class _DateMonthViewState extends State<DateMonthView> {
+  late DateMonthCubit controller;
   @override
   void initState() {
     super.initState();
-    controller = context.read<DateYearCubit>();
+    controller = context.read<DateMonthCubit>();
   }
 
   @override
@@ -36,7 +38,7 @@ class _DateYearViewState extends State<DateYearView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: txt('Year Calander', e: St.bold20)),
+      appBar: AppBar(title: txt('Month Calander', e: St.bold20)),
       resizeToAvoidBottomInset: false,
       drawer: const DefaultDrawer(),
       body: DefaultScreenPadding(
@@ -48,17 +50,21 @@ class _DateYearViewState extends State<DateYearView> {
             handleInputChange: (String year) {
               try {
                 int yearInt = int.parse(year);
-                int maxYear = context.read<DateConversionCubit>().state.lastDay.year;
-                int minYear = context.read<DateConversionCubit>().state.firstDay.year;
+                int maxYear =
+                    context.read<DateConversionCubit>().state.lastDay.year;
+                int minYear =
+                    context.read<DateConversionCubit>().state.firstDay.year;
                 pr(minYear, 'minYear');
                 pr(maxYear, 'maxYear');
                 pr(yearInt, 'enteredYear');
                 if (yearInt <= maxYear && yearInt >= minYear) {
-                  controller.getDateYear(yearInt);
+                  controller.getDateMonth(
+                      yearInt, controller.state.selectedMonth);
                   controller.validate('');
                 } else {
                   pr('condition not met');
-                  controller.validate('Year range between $minYear and $maxYear');
+                  controller
+                      .validate('Year range between $minYear and $maxYear');
                 }
               } catch (e) {
                 controller.validate('You have to enter numeric values');
@@ -66,14 +72,34 @@ class _DateYearViewState extends State<DateYearView> {
               }
             },
           ),
-          BlocBuilder<DateYearCubit, DateYearState>(
+          BlocBuilder<DateMonthCubit, DateMonthState>(
             builder: (context, state) {
-              return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: txt(state.validationMessage, c: Colors.red, e: St.reg14));
+              return state.validationMessage.isEmpty
+                  ? const SizedBox()
+                  : Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: txt(state.validationMessage,
+                          c: Colors.red, e: St.reg14));
             },
           ),
-          BlocBuilder<DateYearCubit, DateYearState>(
+          MonthDropdownWidget(handleMonthSelected: (MonthEnum month) {
+            int maxYear =
+                context.read<DateConversionCubit>().state.lastDay.year;
+            int minYear =
+                context.read<DateConversionCubit>().state.firstDay.year;
+            pr(minYear, 'minYear');
+            pr(maxYear, 'maxYear');
+            controller.state.selectedMonth = month;
+            if (controller.state.selectedYear <= maxYear &&
+                controller.state.selectedYear >= minYear) {
+              controller.getDateMonth(controller.state.selectedYear,
+                  controller.state.selectedMonth);
+              controller.validate('');
+            } else {
+              pr('condition not met');
+            }
+          }),
+          BlocBuilder<DateMonthCubit, DateMonthState>(
             builder: (context, state) {
               if (state.getDateYearState == ResponseState.failure) {
                 return Expanded(

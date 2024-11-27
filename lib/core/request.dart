@@ -63,4 +63,3 @@ const _getDateInfoByMonthResponse = [
 //   },
 //   {'......'},
 // ];
-

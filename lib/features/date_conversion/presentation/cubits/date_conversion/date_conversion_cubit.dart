@@ -32,7 +32,9 @@ class DateConversionCubit extends Cubit<DateConversionState> {
 
   Future getSelectedDateInfo(DateTime selectedDate) async {
     final t = prt('getSelectedDateInfo - DateConversionCubit');
-    emit(state.copyWith(getSelectedDateInfoState: ResponseState.loading, selectedGeorgianDate: selectedDate));
+    emit(state.copyWith(
+        getSelectedDateInfoState: ResponseState.loading,
+        selectedGeorgianDate: selectedDate));
     final result = await dateConversionRepo.getDateConversion(selectedDate);
     return result.fold(
       (Failure failure) {
@@ -51,7 +53,8 @@ class DateConversionCubit extends Cubit<DateConversionState> {
         emit(
           state.copyWith(
             selectedGeorgianDate: selectedDate,
-            selectedDateConversionEntity: model.copyWith(selectedGeorgianDate: selectedDate),
+            selectedDateConversionEntity:
+                model.copyWith(selectedGeorgianDate: selectedDate),
             getSelectedDateInfoState: ResponseState.success,
           ),
         );

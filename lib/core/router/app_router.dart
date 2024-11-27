@@ -3,7 +3,8 @@ import 'package:islamic_calander/core/router/app_routes_names.dart';
 import 'package:islamic_calander/core/router/middleware.dart';
 import 'package:islamic_calander/core/widgets/splash_screen.dart';
 import 'package:islamic_calander/features/date_conversion/presentation/views/date_conversion_view.dart';
-import 'package:islamic_calander/features/date_year/presentation/date_year_view.dart';
+import 'package:islamic_calander/features/date_info/presentation/date_month_view.dart';
+import 'package:islamic_calander/features/date_info/presentation/date_year_view.dart';
 
 class AppRouter {
   AppMiddleWare appMiddleWare;
@@ -25,6 +26,11 @@ class AppRouter {
       case AppRoutesNames.dateYearView:
         return MaterialPageRoute(
           builder: (context) => const DateYearView(),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.dateMonthView:
+        return MaterialPageRoute(
+          builder: (context) => const DateMonthView(),
           settings: routeSettings,
         );
       default:

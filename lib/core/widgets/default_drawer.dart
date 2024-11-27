@@ -25,7 +25,8 @@ class DefaultDrawer extends StatelessWidget {
           children: <Widget>[
             UserAccountsDrawerHeader(
               accountName: txt("Islamic Calendar", e: St.bold16),
-              accountEmail: const Text("The best use of time is to spend it\nin the remembrance of Allah."),
+              accountEmail: const Text(
+                  "The best use of time is to spend it\nin the remembrance of Allah."),
               currentAccountPicture: Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 5.w),
                 child: Icon(
@@ -43,7 +44,8 @@ class DefaultDrawer extends StatelessWidget {
               icon: MdiIcons.databaseSearch,
               text: 'Home',
               onTap: () {
-                Navigator.pushNamedAndRemoveUntil(context, AppRoutesNames.dateConversionView, (_) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, AppRoutesNames.dateConversionView, (_) => false);
               },
             ),
             _createDrawerItem(
@@ -51,7 +53,8 @@ class DefaultDrawer extends StatelessWidget {
               icon: MdiIcons.databaseSearch,
               text: 'Year',
               onTap: () {
-                Navigator.pushNamedAndRemoveUntil(context, AppRoutesNames.dateYearView, (_) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, AppRoutesNames.dateYearView, (_) => false);
               },
             ),
             _createDrawerItem(
@@ -59,7 +62,8 @@ class DefaultDrawer extends StatelessWidget {
               icon: Icons.calendar_month,
               text: 'Month',
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, AppRoutesNames.dateMonthView, (_) => false);
               },
             ),
             _createDrawerItem(
@@ -87,7 +91,9 @@ class DefaultDrawer extends StatelessWidget {
   }
 
   Widget _createDrawerItem(BuildContext context,
-      {required IconData icon, required String text, GestureTapCallback? onTap}) {
+      {required IconData icon,
+      required String text,
+      GestureTapCallback? onTap}) {
     return ListTile(
       title: Text(text, style: const TextStyle(color: Colors.white)),
       leading: Icon(icon, color: context.secondaryHeaderColor),

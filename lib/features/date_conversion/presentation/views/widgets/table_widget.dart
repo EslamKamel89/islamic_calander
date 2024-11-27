@@ -32,7 +32,8 @@ class _TableWidgetState extends State<TableWidget> {
               return current.buildWhen == 'UPDATE_TABLE_WIDGET';
             },
             builder: (context, state) {
-              DateTime selectedGeorgianDate = controller.state.selectedGeorgianDate ?? DateTime.now();
+              DateTime selectedGeorgianDate =
+                  controller.state.selectedGeorgianDate ?? DateTime.now();
               return TableCalendar(
                 firstDay: state.firstDay,
                 lastDay: state.lastDay,
@@ -102,21 +103,25 @@ class _TableWidgetState extends State<TableWidget> {
           builder: (context, state) {
             if (state.getSelectedDateInfoState == ResponseState.loading) {
               return const ConversionDateInfoLoadingWidget();
-            } else if (state.getSelectedDateInfoState == ResponseState.failure) {
+            } else if (state.getSelectedDateInfoState ==
+                ResponseState.failure) {
               return const ConversionDateInfoFailureWidget();
-            } else if (state.getSelectedDateInfoState == ResponseState.success) {
+            } else if (state.getSelectedDateInfoState ==
+                ResponseState.success) {
               return Container(
                 padding: const EdgeInsets.all(16.0),
                 height: 250.h,
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(20.0)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(20.0)),
                   color: context.secondaryHeaderColor.withOpacity(0.4),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    txt('Date Information', e: St.bold18, c: context.primaryColor),
+                    txt('Date Information',
+                        e: St.bold18, c: context.primaryColor),
                     const SizedBox(height: 20.0),
                     Expanded(
                       child: Column(
@@ -125,16 +130,21 @@ class _TableWidgetState extends State<TableWidget> {
                           _buildDateRow(
                               image: 'calendar_5.png',
                               title: 'Georgian date',
-                              date: DateFormat('d MMMM, yyyy')
-                                  .format((state.selectedDateConversionEntity?.selectedGeorgianDate)!)),
+                              date: DateFormat('d MMMM, yyyy').format((state
+                                  .selectedDateConversionEntity
+                                  ?.selectedGeorgianDate)!)),
                           _buildDateRow(
                               image: 'calendar_7.png',
                               title: 'Old Hijri date',
-                              date: state.selectedDateConversionEntity?.selectedOldHijriDate ?? ''),
+                              date: state.selectedDateConversionEntity
+                                      ?.selectedOldHijriDate ??
+                                  ''),
                           _buildDateRow(
                               image: 'calendar_9.png',
                               title: 'New Hijri date',
-                              date: state.selectedDateConversionEntity?.selectedNewHijriDate ?? ''),
+                              date: state.selectedDateConversionEntity
+                                      ?.selectedNewHijriDate ??
+                                  ''),
                         ],
                       ),
                     ),
@@ -150,7 +160,8 @@ class _TableWidgetState extends State<TableWidget> {
     );
   }
 
-  Widget _buildDateRow({required String title, required String date, required image}) {
+  Widget _buildDateRow(
+      {required String title, required String date, required image}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(

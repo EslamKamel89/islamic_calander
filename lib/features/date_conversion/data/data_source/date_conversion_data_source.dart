@@ -12,17 +12,20 @@ class HomeRepoDataSource {
   HomeRepoDataSource({
     required this.api,
   });
-  Future<SelectedDateConversionModel> getDateConversion(DateTime selectedDate) async {
+  Future<SelectedDateConversionModel> getDateConversion(
+      DateTime selectedDate) async {
     String year = DateFormat('yyyy').format(selectedDate);
     String month = DateFormat('MMM').format(selectedDate).toLowerCase();
     String day = DateFormat('d').format(selectedDate);
     final t = prt('getDateConversion - HomeRepoDataSource');
-    final data = await api.get(EndPoint.dateConversionEndPoint, queryParameter: {
+    final data =
+        await api.get(EndPoint.dateConversionEndPoint, queryParameter: {
       'year': year,
       'month': month,
       'day': day,
     });
-    SelectedDateConversionModel model = pr(SelectedDateConversionModel.fromJson(jsonDecode(data)), t);
+    SelectedDateConversionModel model =
+        pr(SelectedDateConversionModel.fromJson(jsonDecode(data)), t);
     return model;
   }
 }

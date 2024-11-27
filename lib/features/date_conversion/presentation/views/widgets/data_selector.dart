@@ -25,7 +25,10 @@ class DataSelectorState extends State<DataSelector> {
         children: [
           Text(
             'Select type of data:',
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: context.primaryColor),
+            style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: context.primaryColor),
           ),
           const SizedBox(height: 15.0),
           Row(
@@ -38,21 +41,27 @@ class DataSelectorState extends State<DataSelector> {
                       Text(
                         'After',
                         style: TextStyle(
-                          color: controller.state.selectedOption == DataProcessingOption.after
+                          color: controller.state.selectedOption ==
+                                  DataProcessingOption.after
                               ? context.primaryColor
                               : null,
-                          fontWeight:
-                              controller.state.selectedOption == DataProcessingOption.after ? FontWeight.bold : null,
+                          fontWeight: controller.state.selectedOption ==
+                                  DataProcessingOption.after
+                              ? FontWeight.bold
+                              : null,
                         ),
                       ),
                       Text(
                         'Processing',
                         style: TextStyle(
-                          color: controller.state.selectedOption == DataProcessingOption.after
+                          color: controller.state.selectedOption ==
+                                  DataProcessingOption.after
                               ? context.primaryColor
                               : null,
-                          fontWeight:
-                              controller.state.selectedOption == DataProcessingOption.after ? FontWeight.bold : null,
+                          fontWeight: controller.state.selectedOption ==
+                                  DataProcessingOption.after
+                              ? FontWeight.bold
+                              : null,
                           fontSize: 12,
                         ),
                       ),
@@ -77,21 +86,27 @@ class DataSelectorState extends State<DataSelector> {
                       Text(
                         'Before',
                         style: TextStyle(
-                          color: controller.state.selectedOption == DataProcessingOption.before
+                          color: controller.state.selectedOption ==
+                                  DataProcessingOption.before
                               ? context.primaryColor
                               : null,
-                          fontWeight:
-                              controller.state.selectedOption == DataProcessingOption.before ? FontWeight.bold : null,
+                          fontWeight: controller.state.selectedOption ==
+                                  DataProcessingOption.before
+                              ? FontWeight.bold
+                              : null,
                         ),
                       ),
                       Text(
                         'Processing',
                         style: TextStyle(
-                          color: controller.state.selectedOption == DataProcessingOption.before
+                          color: controller.state.selectedOption ==
+                                  DataProcessingOption.before
                               ? context.primaryColor
                               : null,
-                          fontWeight:
-                              controller.state.selectedOption == DataProcessingOption.before ? FontWeight.bold : null,
+                          fontWeight: controller.state.selectedOption ==
+                                  DataProcessingOption.before
+                              ? FontWeight.bold
+                              : null,
                           fontSize: 12,
                         ),
                       ),
